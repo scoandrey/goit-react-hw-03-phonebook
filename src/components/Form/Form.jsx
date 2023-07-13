@@ -23,9 +23,10 @@ class Form extends Component {
   render() {
     return (
       <form className="form" onSubmit={this.handleSubmit}>
-        <label>
-          Name
+        <label className="formLabel">
+          <span className="formName">Name</span>
           <input
+            className="input"
             onChange={this.nameChange}
             type="text"
             name="name"
@@ -34,9 +35,10 @@ class Form extends Component {
             required
           />
         </label>
-        <label>
-          Number
+        <label className="formLabel">
+          <span>Number</span>
           <input
+            className="input"
             onChange={this.numberChange}
             type="tel"
             name="number"
@@ -46,7 +48,9 @@ class Form extends Component {
           />
         </label>
 
-        <button type="submit">Add Contact</button>
+        <button type="submit" className="submit">
+          Add Contact
+        </button>
       </form>
     );
   }

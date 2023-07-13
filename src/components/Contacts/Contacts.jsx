@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './contacts.css'
+import './contacts.css';
 
 class Contacts extends Component {
   render() {
@@ -9,8 +9,11 @@ class Contacts extends Component {
       <ul className="contacts">
         {contacts.map(contact => (
           <React.Fragment key={contact.id}>
-            <li className="contactsList">{contact.name}</li>
-            <button onClick={() => removeContact(contact)}>Delete</button>
+            <li className="contactsList">
+              {contact.name}: {contact.number} <button className="delete" onClick={() => removeContact(contact)}>
+                Delete
+              </button>
+            </li>
           </React.Fragment>
         ))}
       </ul>

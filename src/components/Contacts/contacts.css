@@ -1,6 +1,15 @@
-.contacts {
-    
+
+
+.delete {
+  font-size: 30px;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  color: black;
+  padding: 8px 16px;
+  font-size: 16px;
 }
 
-.contactsList {
+.delete:hover {
+  background-color: #4676d7;
 }

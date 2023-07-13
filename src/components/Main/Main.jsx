@@ -12,8 +12,6 @@ class Main extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
 
@@ -24,20 +22,21 @@ class Main extends Component {
   };
 
   addContact = contact => {
-    const contacts = this.state.contacts;
-    contacts.push({ ...contact, id: nanoid() });
-    this.setState({ contacts });
-    // if (this.state.name === this.name.value) {
-    //   alert(`${contact}is already in contacts`);
-    // }
+    if (
+      !this.state.contacts.filter(
+        c => c.name.toLocaleLowerCase() === contact.name.toLocaleLowerCase()
+      ).length
+    ) {
+      const contacts = this.state.contacts;
+      contacts.push({ ...contact, id: nanoid() });
+      this.setState({ contacts });
+    } else {
+      alert(`${contact.name} is already in contacts`);
+    }
   };
 
   setFilter = name => {
-    let { contacts } = this.state;
-    return contacts.filter(c => c.name.includes(name));
-    
-    // this.setState(state => ({ ...state, filter: name }));
-    // console.log(this.state.filter);
+    this.setState({ filter: name });
   };
 
   render() {
@@ -47,10 +46,12 @@ class Main extends Component {
         <Form onSubmit={this.addContact} />
 
         <h2>Contacts</h2>
-
+        <span>Find contacts by name</span>
         <Filter onChange={this.setFilter} />
         <Contacts
-          contacts={this.state.contacts}
+          contacts={this.state.contacts.filter(c =>
+            c.name.toLowerCase().includes(this.state.filter.toLowerCase())
+          )}
           removeContact={this.removeContact}
         />
       </>

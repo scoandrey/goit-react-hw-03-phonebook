@@ -1,9 +1,10 @@
 import React from 'react';
+import './Filter.css'
 
 class Filter extends React.Component {
   render() {
     const { onChange } = this.props;
-    return <input onChange={e => onChange(e.target.value)}></input>;
+    return <input className='inputFilter' onChange={e => onChange(e.target.value)} />;
   }
 }
 

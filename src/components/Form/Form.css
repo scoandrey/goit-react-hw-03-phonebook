@@ -1,3 +1,31 @@
 .form {
-    
+    border: 1px solid black;
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  
+}
+
+.submit {
+  font-size: 30px;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  color: black;
+  padding: 8px 16px;
+  font-size: 16px;
+  margin: 20px;
+}
+
+.submit:hover {
+  background-color: #4676d7;
+}
+
+.input {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
