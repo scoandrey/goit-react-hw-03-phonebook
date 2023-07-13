@@ -24,7 +24,7 @@ class Main extends Component {
   addContact = contact => {
     if (
       !this.state.contacts.filter(
-        c => c.name.toLocaleLowerCase() === contact.name.toLocaleLowerCase()
+        c => c.name.toLowerCase() === contact.name.toLowerCase()
       ).length
     ) {
       const contacts = this.state.contacts;
