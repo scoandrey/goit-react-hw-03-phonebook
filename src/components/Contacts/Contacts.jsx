@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './contacts.css';
 
-class Contacts extends Component {
-  render() {
-    const { contacts, removeContact } = this.props;
+const Contacts = props => {
+  const { contacts, removeContact } = props;
 
-    return (
-      <ul className="contacts">
-        {contacts.map(contact => (
-          <React.Fragment key={contact.id}>
-            <li className="contactsList">
-              {contact.name}: {contact.number} <button className="delete" onClick={() => removeContact(contact)}>
-                Delete
-              </button>
-            </li>
-          </React.Fragment>
-        ))}
-      </ul>
-    );
-  }
-}
+  return (
+    <ul className="contacts">
+      {contacts.map(contact => (
+        <React.Fragment key={contact.id}>
+          <li className="contactsList">
+            {contact.name}: {contact.number}{' '}
+            <button className="delete" onClick={() => removeContact(contact.id)}>
+              Delete
+            </button>
+          </li>
+        </React.Fragment>
+      ))}
+    </ul>
+  );
+};
 
 export default Contacts;

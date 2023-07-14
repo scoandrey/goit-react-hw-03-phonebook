@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import './Form.css';
 
 class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+  state = this.initialState();
 
   nameChange = e => {
     this.setState({ name: e.target.value });
@@ -18,7 +15,12 @@ class Form extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     this.props.onSubmit(this.state);
+    this.setState(this.initialState());
   };
+
+  initialState() {
+    return { name: '', number: '' };
+  }
 
   render() {
     return (
@@ -27,6 +29,7 @@ class Form extends Component {
           <span className="formName">Name</span>
           <input
             className="input"
+            value={this.state.name}
             onChange={this.nameChange}
             type="text"
             name="name"
@@ -39,6 +42,7 @@ class Form extends Component {
           <span>Number</span>
           <input
             className="input"
+            value={this.state.number}
             onChange={this.numberChange}
             type="tel"
             name="number"
