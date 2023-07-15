@@ -18,7 +18,6 @@ class App extends Component {
   removeContact = id => {
     this.setState(prevState => {
       const contacts = prevState.contacts.filter(cont => cont.id !== id);
-      // localStorage.setItem('contacts', JSON.stringify(contacts));
       return { contacts };
     });
   };
@@ -43,14 +42,6 @@ class App extends Component {
   setFilter = name => {
     this.setState({ filter: name });
   };
-
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem('contacts');
-
-  //   if (contacts) {
-  //     this.setState({ contacts: JSON.parse(contacts) });
-  //   }
-  // }
 
   render() {
     const filterContacts = () =>
