@@ -16,39 +16,41 @@ class App extends Component {
   };
 
   removeContact = id => {
-    const contacts = this.state.contacts.filter(cont => cont.id !== id);
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-    this.setState({ contacts });
-    // Скижите пожалуйста какие могут быть 'наклaдки' если setState вызывается послединм?
+    this.setState(prevState => {
+      const contacts = prevState.contacts.filter(cont => cont.id !== id);
+      // localStorage.setItem('contacts', JSON.stringify(contacts));
+      return { contacts };
+    });
   };
 
   addContact = contact => {
+    const { contacts } = this.state;
     if (
-      this.state.contacts.find(
+      contacts.find(
         item => item.name.toLowerCase() === contact.name.toLowerCase()
       )
     ) {
       alert(`${contact.name} is already in contacts`);
       return;
     }
-
-    const contacts = this.state.contacts;
-    contacts.push({ ...contact, id: nanoid() });
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-    this.setState({ contacts });
+    this.setState(prevState => {
+      const contacts = [...prevState.contacts];
+      contacts.push({ ...contact, id: nanoid() });
+      return { contacts };
+    });
   };
 
   setFilter = name => {
     this.setState({ filter: name });
   };
 
-  componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
+  // componentDidMount() {
+  //   const contacts = localStorage.getItem('contacts');
 
-    if (contacts) {
-      this.setState({ contacts: JSON.parse(contacts) });
-    }
-  }
+  //   if (contacts) {
+  //     this.setState({ contacts: JSON.parse(contacts) });
+  //   }
+  // }
 
   render() {
     const filterContacts = () =>
