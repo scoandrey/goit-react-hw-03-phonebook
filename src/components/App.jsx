@@ -18,13 +18,12 @@ class App extends Component {
   removeContact = id => {
     this.setState(prevState => {
       const contacts = prevState.contacts.filter(cont => cont.id !== id);
-      localStorage.setItem('contacts', JSON.stringify(contacts));
       return { contacts };
     });
   };
 
   addContact = contact => {
-    
+
     const { contacts } = this.state;
     if (
       contacts.find(
@@ -37,7 +36,6 @@ class App extends Component {
     this.setState(prevState => {
       const contacts = [...prevState.contacts];
       contacts.push({ ...contact, id: nanoid() });
-      localStorage.setItem('contacts', JSON.stringify(contacts));
       return { contacts };
     });
   };
