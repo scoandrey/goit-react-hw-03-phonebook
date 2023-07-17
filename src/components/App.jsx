@@ -24,6 +24,7 @@ class App extends Component {
   };
 
   addContact = contact => {
+    
     const { contacts } = this.state;
     if (
       contacts.find(
