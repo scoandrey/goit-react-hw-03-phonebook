@@ -4,6 +4,8 @@ import Contacts from 'components/Contacts/Contacts';
 import Form from 'components/Form/Form';
 import Filter from 'components/Filter/Filter';
 
+const CONTACTS_LOCALSTORAGE = 'contacts';
+
 class App extends Component {
   state = {
     contacts: [
@@ -18,7 +20,6 @@ class App extends Component {
   removeContact = id => {
     this.setState(prevState => {
       const contacts = prevState.contacts.filter(cont => cont.id !== id);
-      localStorage.setItem('contacts', JSON.stringify(contacts));
       return { contacts };
     });
   };
@@ -36,7 +37,6 @@ class App extends Component {
     this.setState(prevState => {
       const contacts = [...prevState.contacts];
       contacts.push({ ...contact, id: nanoid() });
-      localStorage.setItem('contacts', JSON.stringify(contacts));
       return { contacts };
     });
   };
@@ -45,6 +45,22 @@ class App extends Component {
     this.setState({ filter: name });
   };
 
+  componentDidMount() {
+    if (localStorage.getItem(CONTACTS_LOCALSTORAGE)) {
+      this.setState({
+        contacts: JSON.parse(localStorage.getItem(CONTACTS_LOCALSTORAGE)),
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      localStorage.setItem(
+        CONTACTS_LOCALSTORAGE,
+        JSON.stringify(this.state.contacts)
+      );
+    }
+  }
   render() {
     const filterContacts = () =>
       this.state.contacts.filter(contact =>
