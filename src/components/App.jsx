@@ -5,6 +5,7 @@ import Form from 'components/Form/Form';
 import Filter from 'components/Filter/Filter';
 
 const CONTACTS_LOCALSTORAGE = 'contacts';
+const contacts = localStorage.getItem(CONTACTS_LOCALSTORAGE)
 
 class App extends Component {
   state = {
@@ -16,6 +17,23 @@ class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    if (contacts) {
+      this.setState({
+        contacts: JSON.parse(contacts),
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts.length !== this.state.contacts.length) {
+      localStorage.setItem(
+        CONTACTS_LOCALSTORAGE,
+        JSON.stringify(this.state.contacts)
+      );
+    }
+  }
 
   removeContact = id => {
     this.setState(prevState => {
@@ -45,22 +63,7 @@ class App extends Component {
     this.setState({ filter: name });
   };
 
-  componentDidMount() {
-    if (localStorage.getItem(CONTACTS_LOCALSTORAGE)) {
-      this.setState({
-        contacts: JSON.parse(localStorage.getItem(CONTACTS_LOCALSTORAGE)),
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.contacts.length !== this.state.contacts.length) {
-      localStorage.setItem(
-        CONTACTS_LOCALSTORAGE,
-        JSON.stringify(this.state.contacts)
-      );
-    }
-  }
+  
   render() {
     const filterContacts = () =>
       this.state.contacts.filter(contact =>
