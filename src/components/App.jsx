@@ -5,7 +5,6 @@ import Form from 'components/Form/Form';
 import Filter from 'components/Filter/Filter';
 
 const CONTACTS_LOCALSTORAGE = 'contacts';
-const contacts = localStorage.getItem(CONTACTS_LOCALSTORAGE)
 
 class App extends Component {
   state = {
@@ -19,6 +18,8 @@ class App extends Component {
   };
 
   componentDidMount() {
+    const contacts = localStorage.getItem(CONTACTS_LOCALSTORAGE);
+    
     if (contacts) {
       this.setState({
         contacts: JSON.parse(contacts),
@@ -63,7 +64,6 @@ class App extends Component {
     this.setState({ filter: name });
   };
 
-  
   render() {
     const filterContacts = () =>
       this.state.contacts.filter(contact =>
